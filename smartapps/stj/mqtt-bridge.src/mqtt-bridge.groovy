@@ -309,7 +309,8 @@ import groovy.transform.Field
         capability: "capability.temperatureMeasurement",
         attributes: [
             "temperature"
-        ]
+        ],
+        action: "actionSet"
     ],
     "thermostat": [
         name: "Thermostat",
@@ -685,6 +686,10 @@ def actionMusicPlayer(device, attribute, value) {
             }
         break
     }
+}
+
+def actionSet(device, attribute, value) {
+    device.set(value)
 }
 
 def actionColorTemperature(device, attribute, value) {
