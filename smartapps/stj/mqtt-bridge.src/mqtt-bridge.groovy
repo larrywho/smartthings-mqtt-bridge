@@ -308,7 +308,14 @@ import groovy.transform.Field
         name: "Temperature Measurement",
         capability: "capability.temperatureMeasurement",
         attributes: [
-            "temperature"
+            "temperature",
+            "iname",
+            "itilt",
+            "itemperature",
+            "itemp_units",
+            "ibattery",
+            "igravity",
+            "iRSSI"
         ],
         action: "actionSet"
     ],
@@ -689,7 +696,32 @@ def actionMusicPlayer(device, attribute, value) {
 }
 
 def actionSet(device, attribute, value) {
-    device.set(value)
+    switch(attribute) {
+        case "temperature":
+            device.set(value)
+        break
+        case "iname":
+            device.setName(value)
+        break
+        case "itilt":
+            device.setTilt(value)
+        break
+        case "itemperature":
+            device.set(value)
+        break
+        case "itemp_units":
+            device.setTempUnits(value)
+        break
+        case "ibattery":
+            device.setBattery(value)
+        break
+        case "igravity":
+            device.setGravity(value)
+        break
+        case "iRSSI":
+            device.setSignalStrength(value)
+        break
+    }
 }
 
 def actionColorTemperature(device, attribute, value) {
