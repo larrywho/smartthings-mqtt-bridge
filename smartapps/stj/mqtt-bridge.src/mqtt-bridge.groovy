@@ -309,13 +309,12 @@ import groovy.transform.Field
         capability: "capability.temperatureMeasurement",
         attributes: [
             "temperature",
-            "iname",
-            "itilt",
-            "itemperature",
-            "itemp_units",
-            "ibattery",
-            "igravity",
-            "iRSSI"
+            "name",
+            "tilt",
+            "temp_units",
+            "battery",
+            "gravity",
+            "RSSI"
         ],
         action: "actionSet"
     ],
@@ -696,30 +695,36 @@ def actionMusicPlayer(device, attribute, value) {
 }
 
 def actionSet(device, attribute, value) {
+    def timeString = new Date().format("yyyy-MM-dd h:mm a", location.timeZone)
+
     switch(attribute) {
         case "temperature":
             device.set(value)
+            device.setDate(timeString + " (temp)")
         break
-        case "iname":
+        case "name":
             device.setName(value)
+            device.setDate(timeString + " (name)")
         break
-        case "itilt":
+        case "tilt":
             device.setTilt(value)
+            device.setDate(timeString + " (tilt)")
         break
-        case "itemperature":
-            device.set(value)
-        break
-        case "itemp_units":
+        case "temp_units":
             device.setTempUnits(value)
+            device.setDate(timeString + " (units)")
         break
-        case "ibattery":
+        case "battery":
             device.setBattery(value)
+            device.setDate(timeString + " (batt)")
         break
-        case "igravity":
+        case "gravity":
             device.setGravity(value)
+            device.setDate(timeString + " (gravity)")
         break
-        case "iRSSI":
+        case "RSSI":
             device.setSignalStrength(value)
+            device.setDate(timeString + " (signal)")
         break
     }
 }
